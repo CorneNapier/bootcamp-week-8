@@ -110,5 +110,36 @@ select empname, dname FROM employee left join department on department.depno=emp
 -- right join
 select empname, dname FROM employee right join department on department.depno=employee.depno;
 
+create database course;
+use course;
+
+create table Instructor
+(
+  InstructorId int primary key,
+  InstructorName varchar(50) not null
+);
+
+Create table Trainer
+( 
+   trainerId int primary key,
+   trainerName varchar(30),
+   trainerAge int
+);
+
+insert into instructor (InstructorId, InstructorName) values
+(2, 'Mark'),
+(1, 'Abdul'),
+(3, 'Matt'),
+(4, 'Sandra');
+
+insert into trainer (trainerId, trainerName, trainerAge) values
+(1, 'Abdul', 32),
+(2, 'Zak', 26),
+(3, 'Waqas', 36);
+
+select * from trainer inner join instructor on instructorName = trainername;
+select * from trainer left join instructor on instructorName = trainername;
+select * from trainer right join instructor on instructorName = trainername;
+
 
 
