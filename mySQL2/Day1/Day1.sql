@@ -141,5 +141,18 @@ select * from trainer inner join instructor on instructorName = trainername;
 select * from trainer left join instructor on instructorName = trainername;
 select * from trainer right join instructor on instructorName = trainername;
 
+-- multiple table join
+use company1;
+
+select fname, lname, pname, hours from employee left join
+works_on on Essn=Ssn
+inner join Project on Pno=Pnumber;
+
+-- display department name and thier manager name
+select concat(fname, ' ', lname) as 'Full Name', ssn, Dname as 'Department'
+from employee
+INNER JOIN
+Department on Ssn=Mgrssn;
+
 
 
