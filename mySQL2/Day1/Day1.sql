@@ -63,3 +63,52 @@ select id, name from manager;
 -- make sure columns are in the correct order when selecting
 
 -- JOIN in mySQL
+-- inner join will only selects data which is available(common) in both tables
+-- left join will  select all the data which is available in the left table and the common data in the right table
+-- right join will select all the data which is available in the right table and the common data in the left table
+
+use company1;
+-- display all employees and their department name
+select concat(fname, ' ', lname) as 'Full Name', Dname as 'Department' from employee inner join department on DNO=dnumber;
+-- display all departments and their location
+select dname as 'Department', dlocation as 'Location' from department d inner join dept_locations dl on d.dnumber=dl.DNUMBER;
+
+create table Employee 
+(
+  EmpNo int primary key,
+  EmpName varchar(30) not null,
+  DepNo int
+);
+
+create table Department
+(
+   DepNo int primary key,
+   Dname varchar(30) not null,
+   Location varchar(50) not null
+);
+
+insert into employee (EmpNo, EmpName, DepNo) values
+(1001, 'Sahil', 101),
+(1004, 'Kavish', 102),
+(1006, 'Aditya', 103),
+(1005, 'Atul', 104);
+
+insert into department (DepNo, Dname, Location) values
+(101, 'HR', 'Delhi'),
+(102, 'Sales', 'Bangalore'),
+(103, 'Marketing Executive', 'Hyderabad'),
+(104, 'Technical Engineer', 'Chennai');
+
+alter table employee add foreign key(DepNo) references Department(DepNo);
+
+-- display employees and their department name
+select empname as 'Employee Name', dname as 'Department' from employee inner join department on employee.depno=department.depno;
+
+-- left join
+select empname, dname FROM employee left join department on department.depno=employee.depno;
+
+-- right join
+select empname, dname FROM employee right join department on department.depno=employee.depno;
+
+
+
