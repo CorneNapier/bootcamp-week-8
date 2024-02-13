@@ -48,6 +48,9 @@ select current_time();
 -- displays the name of month for a given date
 select monthname('2024-05-03');
 
+-- displays monthname for the current date
+select monthname(current_date());
+
 -- displays the day name for a given date
 select dayname('2024-05-03');
 
@@ -57,10 +60,16 @@ select day('2024-05-03');
 -- displays the year for a given date
 select year('2024-05-03');
 
--- displays monthname for the current date
-select monthname(current_date());
+-- display all employees who are born after 1960
+select * from employee where year(bdate) > 1960;
 
+-- display current date in this format Tuesday, 13 February 2024
+SELECT DATE_FORMAT(CURDATE(), '%W, %e %M %Y') AS 'Current Date';
+/*%W: The full name of the weekday (e.g., "Monday")
+%e: The day of the month without leading zeros (e.g., "13")
+%M: The full name of the month (e.g., "February")
+%Y: The four-digit year (e.g., "2024")*/
 
-
-
-
+-- Research:
+-- on delete cascade
+-- on delete set null
