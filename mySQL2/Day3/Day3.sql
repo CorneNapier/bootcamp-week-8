@@ -90,6 +90,46 @@ case
     else 'Other'
     end as 'Gender'
     from employee;
+    
+-- Task
+/*
+Write a case expression that returns employee's full name salary with bonus as below:
+	if salary is 1000 - 19000 increase 1000 
+	if salary is 20000 - 29000 increase 2000
+	if salary is 30000 - 39000 increase 3000
+	if salary is 40000 - 49000 increase 4000
+	if salary is 50000 - 59000 increase 5000
+	if a person receive no salary then should display 'Not eligible for bonus'
+*/
+select concat(fname, ' ', lname) as 'Full Name', Salary,
+    CASE
+        WHEN salary BETWEEN 1000 AND 19000 THEN salary + 1000
+        WHEN salary BETWEEN 20000 AND 29000 THEN salary + 2000
+        WHEN salary BETWEEN 30000 AND 39000 THEN salary + 3000
+        WHEN salary BETWEEN 40000 AND 49000 THEN salary + 4000
+        WHEN salary BETWEEN 50000 AND 59000 THEN salary + 5000
+        else 'Not eligible for bonus'
+    END AS 'New Salary'
+FROM 
+    employee;
+
+/*
+I would like you to increase the salary of employees based on their departments
+    for example, if an employee is working in the Research department increase it's salary
+    by 5000 and for other departments as well any amount you want.
+    research, admin, headquarters
+*/
+
+select concat(fname, ' ', lname) as 'Full Name', Salary,
+    CASE
+        WHEN dno = 1 THEN salary + 1000
+        WHEN dno = 5  THEN salary + 5000
+        WHEN dno = 4 THEN salary + 2000
+        else 'Not eligible for bonus'
+    END AS 'New Salary'
+FROM 
+    employee;
+    
 
 
 
