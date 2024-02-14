@@ -67,7 +67,29 @@ set AUTOCOMMIT=0;
 commit;
 -- You can also Restore from backup
 -- You can not rollback the data deleted with truncate
+-- ----------------------------------------------------------------------
+-- Case Expression
+/* Used within queries to return a value based on specific conditions
+within queries to return a value based on specific conditions.
+The result of case expression will be a column(similar to if-else statements)*/
+use company1;
 
+-- Increase Salary
+select fname, lname, salary,
+case
+  when Salary=25000 then salary + 2500
+  else 'Not eligible for bonus'
+  end as 'New Salary'
+  from employee;
+  
+  -- Display full word for gender
+  select fname, lname,
+  case
+    when sex='f' then 'Female'
+    when sex='m' then 'Male'
+    else 'Other'
+    end as 'Gender'
+    from employee;
 
 
 
