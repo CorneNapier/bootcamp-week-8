@@ -72,4 +72,11 @@ SELECT DATE_FORMAT(CURDATE(), '%W, %e %M %Y') AS 'Current Date';
 
 -- Research:
 -- on delete cascade
+/* specify whether you want rows deleted in a child table when 
+corresponding rows are deleted in the parent table.*/
+
 -- on delete set null
+/* if a record in the parent table (referenced table) is deleted 
+then the corresponding entry or values in the child table (referencing table) will be set to NULL.*/
+
+
