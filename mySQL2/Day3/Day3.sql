@@ -143,11 +143,11 @@ FROM
     
     -- ----------------------------------------------------------------
 -- Trigger is a block of code which will define a certain action that should happen when certain operations are performed on a table
-/* Create trigger myTrigger before | after insert | Delete | update
+/* Create trigger myTrigger before | after then insert | Delete | update
      on tableName
      For each row
      Begin
-     Cose statement;
+     Code statement;
      End$$
 */
 create table LogInfo
