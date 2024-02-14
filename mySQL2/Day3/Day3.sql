@@ -130,6 +130,13 @@ select concat(fname, ' ', lname) as 'Full Name', Salary,
 FROM 
     employee;
     
-
-
-
+-- by department name
+select concat(fname, ' ', lname) as 'Full Name', dname as 'Department', Salary, 
+    CASE
+        WHEN dname = 'Headquarters' THEN salary + 1000
+        WHEN dname = 'Research'  THEN salary + 5000
+        WHEN dname = 'Administration' THEN salary + 2000
+        else 'Not eligible for bonus'
+    END AS 'New Salary'
+FROM 
+    employee left join department on dno=dnumber;
