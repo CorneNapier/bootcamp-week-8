@@ -140,3 +140,28 @@ select concat(fname, ' ', lname) as 'Full Name', dname as 'Department', Salary,
     END AS 'New Salary'
 FROM 
     employee left join department on dno=dnumber;
+    
+    -- ----------------------------------------------------------------
+-- Trigger is a block of code which will define a certain action that should happen when certain operations are performed on a table
+/* Create trigger myTrigger before | after insert | Delete | update
+     on tableName
+     For each row
+     Begin
+     Cose statement;
+     End$$
+*/
+create table LogInfo
+(
+  message text not null
+);
+
+Delimiter $$
+create trigger deleteData after delete on employee for each row
+   Begin
+     insert into LogInfo (message) values (concat(old.name, ' was deleted by ', current_user(), ' on ', curdate(), ' and', curtime()));
+end $$
+
+select * from loginfo;
+
+delete from employee where name='Gabril';
+
