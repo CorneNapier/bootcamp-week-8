@@ -198,6 +198,37 @@ SELECT SUM(1) AS total_breakdowns
 FROM Breakdown;
 
 
-/* Task 6
-If a member has more than one vehicle, then display multi-car policy
-Create a stored procedure which will display number of cars for any member whose first name and last name you are passing as argument while calling the stored procedure!*/
+-- Task 6
+-- If a member has more than one vehicle, then display multi-car policy
+SELECT 
+    MemberID,
+    CASE
+        WHEN COUNT(*) > 1 THEN 'multi-car policy'
+        ELSE 'single-car policy'
+    END AS Policy
+FROM Vehicle
+GROUP BY MemberID;
+
+-- Create a stored procedure which will display number of cars for any member whose first name and last name you are passing as argument while calling the stored procedure!
+DELIMITER $$
+CREATE PROCEDURE GetNumCarsForMember(
+    IN firstName VARCHAR(20),
+    IN lastName VARCHAR(20)
+)
+BEGIN
+    SELECT 
+        CONCAT(M.MemberFName, ' ', M.MemberLName) AS MemberName,
+        COUNT(V.VehicleReg) AS NumCars
+    FROM 
+        Member M
+    INNER JOIN 
+        Vehicle V ON M.MemberID = V.MemberID
+    WHERE 
+        M.MemberFName = firstName
+        AND M.MemberLName = lastName
+    GROUP BY 
+        M.MemberID;
+END$$
+
+call GetNumCarsForMember('Dave', 'Dominic');
+
