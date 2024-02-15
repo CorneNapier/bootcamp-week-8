@@ -60,4 +60,3 @@ create procedure displayFullName (IN firstName varchar(20), IN lastName varchar(
 call displayFullName('Ahmad', 'Jabbar');
 
 
-
