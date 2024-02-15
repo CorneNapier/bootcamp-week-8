@@ -159,3 +159,45 @@ SELECT V.VehicleMake, COUNT(*) AS total_breakdowns
 FROM Breakdown B
 INNER JOIN Vehicle V ON B.VehicleReg = V.VehicleReg
 GROUP BY V.VehicleMake;
+
+-- Task 5
+-- Using W3Schools or any other resource research the following functions – Avg, Max, Min, Sum.  Explain with examples how each one is used.
+
+-- Avg
+-- The AVG function calculates the average value of a numeric column.
+SELECT AVG(num_cars_owned) AS average_cars_owned
+FROM (
+    SELECT COUNT(*) AS num_cars_owned
+    FROM Vehicle
+    GROUP BY MemberID
+) AS car_counts;
+
+-- Max
+-- The MAX function returns the maximum value in a column.
+SELECT MAX(num_breakdowns) AS max_breakdowns
+FROM (
+    SELECT V.VehicleMake, COUNT(*) AS num_breakdowns
+    FROM Breakdown B
+    INNER JOIN Vehicle V ON B.VehicleReg = V.VehicleReg
+    GROUP BY V.VehicleMake
+) AS breakdown_counts;
+
+/* Min
+The MIN function returns the minimum value in a column.*/
+SELECT MIN(num_breakdowns) AS min_breakdowns
+FROM (
+    SELECT V.VehicleMake, COUNT(*) AS num_breakdowns
+    FROM Breakdown B
+    INNER JOIN Vehicle V ON B.VehicleReg = V.VehicleReg
+    GROUP BY V.VehicleMake
+) AS breakdown_counts;
+
+/* Sum
+The SUM function calculates the total sum of values in a column.*/
+SELECT SUM(1) AS total_breakdowns
+FROM Breakdown;
+
+
+/* Task 6
+If a member has more than one vehicle, then display multi-car policy
+Create a stored procedure which will display number of cars for any member whose first name and last name you are passing as argument while calling the stored procedure!*/
