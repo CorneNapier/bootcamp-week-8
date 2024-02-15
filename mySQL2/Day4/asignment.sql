@@ -115,3 +115,47 @@ group by vehicleReg
 Having count(*) > 1;
 
 -- task 4
+-- All the vehicles a member owns. For example, Matt
+select vehicleMake from vehicle where memberID = 'E665OI232E';
+
+-- The number of vehicles each member has – sort the data based on the number of car from highest to lowest.
+SELECT M.MemberID, M.MemberFName, M.MemberLName, M.MemberLoc, COUNT(V.VehicleReg) AS num_vehicles
+FROM Member M
+LEFT JOIN Vehicle V ON M.MemberID = V.MemberID
+GROUP BY M.MemberID, M.MemberFName, M.MemberLName, M.MemberLoc
+ORDER BY num_vehicles DESC;
+
+-- All vehicles that have broken down in a particular location along with member details.
+SELECT V.*, M.*
+FROM Vehicle V
+INNER JOIN Breakdown B ON V.VehicleReg = B.VehicleReg
+INNER JOIN Member M ON V.MemberID = M.MemberID
+WHERE B.BreakdownLoc = 'London';
+
+-- A list of all breakdown along with member and engineer details between two dates.
+SELECT B.*, V.*, M.*, E.*
+FROM Breakdown B
+INNER JOIN Vehicle V ON B.VehicleReg = V.VehicleReg
+INNER JOIN Member M ON V.MemberID = M.MemberID
+INNER JOIN Engineer E ON B.EngineerID = E.EngineerID
+WHERE B.BreakdownDATE BETWEEN '23-03-04' AND '2023-09-20';
+
+-- A further 3 relational queries of your choice that are meaningful to the company.
+
+-- total number of breakdowns for each location
+SELECT BreakdownLoc, COUNT(*) AS total_breakdowns
+FROM Breakdown
+GROUP BY BreakdownLoc;
+
+-- member with the most recent breakdown
+SELECT M.*, V.*, B.*
+FROM Breakdown B
+INNER JOIN Vehicle V ON B.VehicleReg = V.VehicleReg
+INNER JOIN Member M ON V.MemberID = M.MemberID
+WHERE B.BreakdownDATE = (SELECT MAX(BreakdownDATE) FROM Breakdown);
+
+-- total number of breakdowns for vehicle make
+SELECT V.VehicleMake, COUNT(*) AS total_breakdowns
+FROM Breakdown B
+INNER JOIN Vehicle V ON B.VehicleReg = V.VehicleReg
+GROUP BY V.VehicleMake;
