@@ -78,3 +78,40 @@ insert into Breakdown values
 (1010, 'MS08RBC', 02, '2023-12-14', '17:30:33', 'Manchester'),
 (1011, 'VU06IHG', 01, '2024-01-26', '18:35:59', 'Newcastle'),
 (1012, 'GF28BCL', 03, '2024-02-22', '19:49:09', 'Portsmouth');
+
+-- task 3
+
+-- The names of members who live in a location
+select * from member where MemberLoc='London';
+
+-- All cars registered with the company e.g. all nissan cars
+select * from vehicle where vehiclemake = 'Ford';
+
+-- number of engineers that work for the company
+select count(*) from engineer;
+
+-- number of members registered
+select count(*) from member;
+
+-- all the breakdowns after a particular date
+SELECT *
+FROM breakdown
+WHERE breakdowndate > '2023-04-01';
+
+-- all the breakdowns beteen 2 dates
+SELECT *
+FROM breakdown
+WHERE breakdowndate between '2023-03-01' and '2023-11-05';
+
+-- The number of times a particular vehicle has broken down
+select vehicleReg, count(*) as 'Num of Breakdowns'
+from breakdown
+where vehicleReg = 'GF28BCL';
+
+-- The number of vehicles broken down more than once
+select vehicleReg, count(*) as 'Num of Breakdowns'
+from breakdown
+group by vehicleReg
+Having count(*) > 1;
+
+-- task 4
